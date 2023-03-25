@@ -4,7 +4,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION = 'us-east-1'
-        S3_BUCKET_NAME = 'my-static-bucket'
+        S3_BUCKET_NAME = 'my-static-bucket-jenkins1'
         WEBSITE_DIRECTORY = 'public'
     }
     stages {
