@@ -1,29 +1,12 @@
 pipeline {
     agent any
-
-    environment {
-        AWS_DEFAULT_REGION = 'us-east-1'
-        AWS_ACCESS_KEY_ID = credentials('AKIA3PRXSPHJKGA4PU5I')
-        AWS_SECRET_ACCESS_KEY = credentials('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')
-    }
-
     stages {
-        stage('Checkout') {
+        stage('deploy') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm install'
-                sh 'npm run build'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh "aws s3 sync dist/ s3://my-bucket-name --delete"
+              sh "aws configure set region $AWS_DEFAULT_REGION" 
+              sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID"  
+              sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
+              sh "aws s3 cp Code/index.html s3://my-static-bucket-jenkins"
             }
         }
     }
